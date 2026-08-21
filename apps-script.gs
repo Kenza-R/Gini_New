@@ -1,60 +1,66 @@
 /**
- * Gini Health: Waitlist → Google Sheets
- * Reçoit les inscriptions (POST depuis index.html) et les ajoute / met à jour
- * dans la feuille "Signups".
+ * Gini Health: Waitlist + Founding Members → Google Sheets
  *
- * Le formulaire envoie en 2 temps :
- *   1) email + firstName (+ ref de parrainage)        -> crée la ligne
- *   2) email + reason (le qualifier choisi ensuite)   -> complète la même ligne
+ * Paste into the bound Apps Script, then:
+ *   Deploy > Manage deployments > pencil > Version: New version > Deploy
  *
- * ⚠️ Après avoir collé ce code : Enregistrer, puis
- *    Déployer > Gérer les déploiements > ✏️ > Version : Nouvelle version > Déployer.
- *    (L'URL /exec reste la même.)
+ * The Next.js /api/signup route posts here with:
+ *   email, phone, list (waitlist | founding), ref, ua
+ *
+ * Each list writes to its own sheet so founding members stay separate.
  */
 
-const SHEET_NAME = 'Signups';
-const HEADERS = ['Date', 'Email', 'First Name', 'Reason', 'Referred By', 'User Agent'];
+const SHEETS = {
+  waitlist: { name: "Waitlist", headers: ["Date", "Email", "Phone", "Referred By", "User Agent"] },
+  founding: { name: "FoundingMembers", headers: ["Date", "Email", "Phone", "Referred By", "User Agent"] },
+};
+
+function resolveSheet(list) {
+  const key = String(list || "waitlist").toLowerCase();
+  return SHEETS[key] || SHEETS.waitlist;
+}
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
   try {
-    lock.waitLock(20000); // évite les écritures concurrentes
+    lock.waitLock(20000);
+
+    const p = e && e.parameter ? e.parameter : {};
+    const email = p.email ? String(p.email).trim().toLowerCase() : "";
+    const phone = p.phone ? String(p.phone).trim() : "";
+    const ref = p.ref ? String(p.ref).trim() : "";
+    const ua = p.ua ? String(p.ua) : "";
+    const config = resolveSheet(p.list);
+
+    if (!email) return json({ ok: false, error: "no email" });
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    let sheet = ss.getSheetByName(SHEET_NAME);
-    if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
-    if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
+    let sheet = ss.getSheetByName(config.name);
+    if (!sheet) sheet = ss.insertSheet(config.name);
+    if (sheet.getLastRow() === 0) sheet.appendRow(config.headers);
 
-    const p = (e && e.parameter) ? e.parameter : {};
-    const email     = p.email     ? String(p.email).trim().toLowerCase() : '';
-    const firstName = p.firstName ? String(p.firstName).trim()           : '';
-    const reason    = p.reason    ? String(p.reason).trim()              : '';
-    const ref       = p.ref       ? String(p.ref).trim()                 : '';
-    const ua        = p.ua        ? String(p.ua)                         : '';
-
-    if (!email) return json({ ok: false, error: 'no email' });
-
-    // Cherche une ligne existante par email (colonne 2)
     const lastRow = sheet.getLastRow();
     let rowIndex = -1;
     if (lastRow > 1) {
       const emails = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
       for (let i = 0; i < emails.length; i++) {
-        if (String(emails[i][0]).trim().toLowerCase() === email) { rowIndex = i + 2; break; }
+        if (String(emails[i][0]).trim().toLowerCase() === email) {
+          rowIndex = i + 2;
+          break;
+        }
       }
     }
 
     if (rowIndex === -1) {
-      // Nouvelle inscription
-      sheet.appendRow([new Date(), email, firstName, reason, ref, ua]);
-      return json({ ok: true, created: true });
+      sheet.appendRow([new Date(), email, phone, ref, ua]);
+      return json({ ok: true, created: true, sheet: config.name });
     }
 
-    // Ligne existante : on ne remplit que ce qui est fourni (sans écraser à vide)
-    if (firstName && !sheet.getRange(rowIndex, 3).getValue()) sheet.getRange(rowIndex, 3).setValue(firstName);
-    if (reason)                                               sheet.getRange(rowIndex, 4).setValue(reason);
-    if (ref && !sheet.getRange(rowIndex, 5).getValue())       sheet.getRange(rowIndex, 5).setValue(ref);
-    return json({ ok: true, updated: true });
+    if (phone) sheet.getRange(rowIndex, 3).setValue(phone);
+    if (ref && !sheet.getRange(rowIndex, 4).getValue()) {
+      sheet.getRange(rowIndex, 4).setValue(ref);
+    }
+    return json({ ok: true, updated: true, sheet: config.name });
   } catch (err) {
     return json({ ok: false, error: String(err) });
   } finally {
@@ -62,32 +68,35 @@ function doPost(e) {
   }
 }
 
-// Nombre de places fondatrices (pour la barre de progression)
 const GOAL = 500;
 
-// GET : renvoie le compteur d'inscrites (pour la barre + la position en file).
-// Supporte le JSONP (?callback=...) pour être lisible côté navigateur malgré le CORS.
 function doGet(e) {
-  const p = (e && e.parameter) ? e.parameter : {};
-  const payload = { ok: true, count: getCount(), goal: GOAL, message: 'Gini Health waitlist endpoint actif' };
+  const p = e && e.parameter ? e.parameter : {};
+  const payload = {
+    ok: true,
+    count: getCount("waitlist"),
+    foundingCount: getCount("founding"),
+    goal: GOAL,
+    message: "Gini Health waitlist endpoint actif",
+  };
   if (p.callback) {
-    return ContentService
-      .createTextOutput(p.callback + '(' + JSON.stringify(payload) + ');')
-      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    return ContentService.createTextOutput(
+      p.callback + "(" + JSON.stringify(payload) + ");"
+    ).setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
   return json(payload);
 }
 
-// Nombre d'inscrites = nombre de lignes - l'en-tête
-function getCount() {
+function getCount(list) {
+  const config = resolveSheet(list);
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(SHEET_NAME);
+  const sheet = ss.getSheetByName(config.name);
   if (!sheet) return 0;
   return Math.max(0, sheet.getLastRow() - 1);
 }
 
 function json(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
+    ContentService.MimeType.JSON
+  );
 }

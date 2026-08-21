@@ -1,16 +1,26 @@
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Dépendances
+# dependencies
 node_modules/
 
-# Vercel
+# next.js
+.next/
+out/
+
+# misc
+.DS_Store
+*.pem
+*.log
+
+# env
+.env
+.env*.local
+
+# captured emails / phones
+data/*.jsonl
+data/*.csv
+
+# vercel
 .vercel
 
-# Logs & divers
-*.log
-npm-debug.log*
-.env
-.env.local
+# typescript
+*.tsbuildinfo
+next-env.d.ts
