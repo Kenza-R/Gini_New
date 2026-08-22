@@ -161,9 +161,9 @@ export default function SiteFooter() {
         ) : null}
       </div>
 
-      <div className="mx-auto grid max-w-5xl grid-cols-1 border-t border-black md:grid-cols-2">
-        <div className="px-6 py-10 sm:px-10 sm:py-14 md:border-r md:border-black">
-          <p className="font-editorial text-[clamp(1.25rem,2.4vw,1.7rem)] font-semibold leading-snug">
+      <div className="grid w-full grid-cols-1 border-t border-black md:grid-cols-[minmax(0,1.55fr)_minmax(16rem,0.85fr)]">
+        <div className="px-6 py-10 sm:px-10 sm:py-14 md:border-r md:border-black lg:px-16 lg:py-16 xl:px-24">
+          <p className="font-editorial max-w-[40rem] text-[clamp(1.25rem,2.2vw,1.85rem)] font-bold leading-snug md:max-w-none">
             Gini started from a frustration our founders know too well, and one
             that too many women around them still live with. The vision is bigger
             than a test. We&apos;re building in service of women, and for their
@@ -172,12 +172,17 @@ export default function SiteFooter() {
             join us.
           </p>
         </div>
-        <div className="border-t border-black px-6 py-10 sm:px-10 sm:py-14 md:border-t-0">
+        <div className="border-t border-black px-6 py-10 sm:px-10 sm:py-14 md:border-t-0 lg:px-16 lg:py-16 xl:px-20">
           <p className="text-[13px] font-semibold tracking-[0.08em] uppercase">About</p>
           <ul className="mt-5 space-y-3 text-[16px]">
             <li>
-              <a href="#about" className="hover:underline">
-                What we&apos;re building
+              <a href="/team" className="hover:underline">
+                Team
+              </a>
+            </li>
+            <li>
+              <a href="/#the-cycle" className="hover:underline">
+                The cycle
               </a>
             </li>
             <li>
@@ -186,7 +191,7 @@ export default function SiteFooter() {
               </button>
             </li>
             <li>
-              <a href="#founding" className="hover:underline">
+              <a href="/#founding" className="hover:underline">
                 Founding members
               </a>
             </li>

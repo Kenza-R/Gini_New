@@ -10,7 +10,7 @@ const EXPERTS = [
   },
   {
     name: "Clare Flannery, MD",
-    role: "Associate Professor, Obstetrics, Gynecology & Reproductive Sciences",
+    role: "Professor of Obstetrics, Gynecology & Reproductive Sciences",
     affiliation: "Yale School of Medicine",
     image: "/experts/clare-flannery.jpg",
     width: 1600,

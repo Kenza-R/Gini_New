@@ -34,7 +34,7 @@ const COPY: Record<LeadList, PopupCopy> = {
   waitlist: {
     emailTitle: "Join our waitlist",
     emailBody:
-      "Hundreds of women have already taken the first step toward understanding their bodies. Leave your email and we'll keep you first in line for news, access dates, and what we're building next.",
+      "Join hundreds of women who decided to take ownership of their health. Leave your email below to receive updates.",
     emailCta: "Join the waitlist",
     phoneTitle: "One last thing",
     phoneBody:

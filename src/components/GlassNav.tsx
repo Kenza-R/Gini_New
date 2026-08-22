@@ -90,7 +90,7 @@ export default function GlassNav() {
             style={{ cursor: "default", width: "100%" }}
           >
             <a
-              href="#top"
+              href="/"
               className="flex shrink-0 items-center pl-1 sm:pl-1.5"
               aria-label="Gini home"
               onClick={() => setMenuOpen(false)}

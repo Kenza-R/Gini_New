@@ -30,16 +30,16 @@ export default function FoundingPricing() {
               <p className="text-[13px] font-medium tracking-[0.04em] text-neutral-500">
                 Annually
               </p>
-              <div className="mt-2 flex flex-wrap items-end gap-x-3 gap-y-1">
+              <div className="relative mt-2 w-fit pr-20">
                 <p className="font-editorial text-[clamp(3.4rem,8vw,4.6rem)] leading-none text-neutral-900">
-                  $
+                  $1,499
                 </p>
-                <p className="font-editorial mb-1.5 text-[1.65rem] text-neutral-400 line-through decoration-neutral-400">
+                <p className="font-editorial absolute -top-1 right-0 text-[1.35rem] leading-none text-neutral-400 line-through decoration-neutral-400">
                   $7,000
                 </p>
               </div>
-              <p className="mt-4 max-w-[16rem] text-[14px] leading-relaxed text-neutral-700">
-                Join as a founding member and keep this price for life.
+              <p className="mt-4 max-w-[18rem] text-[14px] leading-relaxed text-neutral-700">
+                Keep this pricing through every renewal.
               </p>
               <button
                 type="button"
