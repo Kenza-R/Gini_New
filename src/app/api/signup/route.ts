@@ -150,21 +150,27 @@ export async function POST(request: Request) {
     ua,
   };
 
+  let savedLocally = false;
   try {
     await saveLocalFile(record);
+    savedLocally = true;
   } catch (error) {
     console.error("Failed to write signup file", error);
+  }
+
+  let forwarded = false;
+  try {
+    await forwardToSheet(record);
+    forwarded = true;
+  } catch (error) {
+    console.error("Sheet forward failed", error);
+  }
+
+  if (!savedLocally && !forwarded) {
     return Response.json(
       { ok: false, error: "Could not save your signup." },
       { status: 500 }
     );
-  }
-
-  try {
-    await forwardToSheet(record);
-  } catch (error) {
-    // File write already succeeded; sheet forwarding is best-effort.
-    console.error("Sheet forward failed", error);
   }
 
   return Response.json({ ok: true });

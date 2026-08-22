@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Archived previous site — not part of the build.
     "initial website/**",
+    "old-version/**",
   ]),
 ]);
 
