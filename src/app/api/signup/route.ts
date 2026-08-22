@@ -106,12 +106,23 @@ async function forwardToSheet(record: {
     ref: record.ref,
     ua: record.ua,
   });
+  // The live Apps Script is still the original Signups writer. It ignores
+  // `phone` and writes `reason` into column 4. Send the number there too
+  // so it lands in the existing sheet before that script is redeployed.
+  if (record.phone) {
+    payload.set("reason", record.phone);
+  }
 
-  await fetch(endpoint, {
+  const response = await fetch(`${endpoint}?${payload.toString()}`, {
     method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: payload,
     redirect: "follow",
   });
+
+  if (!response.ok) {
+    throw new Error(`Sheet forward failed (${response.status})`);
+  }
 }
 
 export async function POST(request: Request) {
