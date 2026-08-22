@@ -20,7 +20,7 @@ export default function FoundingPricing() {
       className="relative scroll-mt-24 border-t border-neutral-200/80 bg-white py-16 sm:scroll-mt-28 sm:py-24"
     >
       <div className="relative mx-auto max-w-4xl px-5 sm:px-6">
-        <h2 className="font-editorial text-center text-[clamp(2rem,4.5vw,3rem)] leading-[1.1] text-neutral-900">
+        <h2 className="font-display text-center text-[clamp(2rem,4.5vw,3rem)] font-medium leading-[1.1] text-neutral-900">
           Founding Member Pricing
         </h2>
 

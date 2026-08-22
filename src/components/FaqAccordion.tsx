@@ -18,8 +18,8 @@ const FAQ_ITEMS = [
     a: "No. Gini helps you see patterns and prepare for care. It is not a diagnosis, not medical advice, and not a replacement for your doctor.",
   },
   {
-    q: "What does it cost?",
-    a: "Joining the beta is free, and there is no commitment. We'll share pricing with beta members before anything is ever charged.",
+    q: "What if I don't have a cycle?",
+    a: "You would still benefit from Gini. The panels are built specifically around women's metabolism and hormonal health, not only around a monthly bleed. Let us know in onboarding, and we'll make sure you get specific attention for whichever stage of life you're in.",
   },
   {
     q: "Is my data private?",
@@ -53,8 +53,8 @@ export default function FaqAccordion() {
       className="scroll-mt-24 border-t border-neutral-200/80 py-14 sm:scroll-mt-28 sm:py-20"
     >
       <div className="mx-auto max-w-[40rem] px-5 sm:px-6">
-        <h2 className="text-center text-[clamp(1.6rem,3.4vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.03em]">
-          Questions, answered
+        <h2 className="font-display text-center text-[clamp(1.85rem,3.8vw,2.7rem)] font-medium leading-[1.15] tracking-[-0.02em]">
+          Your questions answered
         </h2>
         <div className="mt-8 divide-y divide-neutral-200/80 border-y border-neutral-200/80">
           {FAQ_ITEMS.map((item) => (

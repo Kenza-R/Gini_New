@@ -30,7 +30,7 @@ export default function ExpertBoard() {
         <p className="text-center text-[13px] font-semibold uppercase tracking-[0.14em] text-neutral-400">
           Medical advisors
         </p>
-        <h2 className="mt-3 text-center text-[clamp(1.7rem,3.6vw,2.5rem)] font-semibold leading-[1.12] tracking-[-0.03em]">
+        <h2 className="font-display mt-3 text-center text-[clamp(1.9rem,4vw,2.8rem)] font-medium leading-[1.15] tracking-[-0.02em]">
           Backed by leading experts in the field
         </h2>
         <p className="mx-auto mt-4 max-w-[34rem] text-center text-[16px] leading-relaxed text-neutral-600">

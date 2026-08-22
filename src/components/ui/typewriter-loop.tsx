@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const DEFAULT_PHRASES = ["just stress", "normal", "in your head"];
+const DEFAULT_PHRASES = ["just stress", "just normal", "in your head"];
 
 type TypewriterLoopProps = {
   phrases?: string[];

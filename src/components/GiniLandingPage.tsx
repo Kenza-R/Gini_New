@@ -9,6 +9,7 @@ import {
 import { GlassButton, GlassFilter } from "@/components/ui/liquid-glass";
 import { TypewriterLoop } from "@/components/ui/typewriter-loop";
 import HowItWorksScroll from "@/components/HowItWorksScroll";
+import SymptomTubeScroll from "@/components/SymptomTubeScroll";
 import ExpertBoard from "@/components/ExpertBoard";
 import CustomerQuotes from "@/components/CustomerQuotes";
 import FaqAccordion from "@/components/FaqAccordion";
@@ -62,20 +63,6 @@ const AUDIENCE = [
   },
 ] as const;
 
-const GINI_IS = [
-  "A blood test built for women's bodies",
-  "Testing timed to your cycle, so trends mean something",
-  "One place where your symptoms, labs, and history connect",
-  "A clearer handoff to the right doctor",
-] as const;
-
-const GINI_IS_NOT = [
-  "A diagnosis, or a replacement for your doctor",
-  "Another app tracking one thing in isolation",
-  "Something to self-diagnose with at 2 a.m.",
-  "A one-off lab result with no context",
-] as const;
-
 function JoinBetaButton({
   className,
   contentClassName,
@@ -119,7 +106,7 @@ function GiniLandingContent() {
       <section className="relative min-h-[100svh] overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/hero-women.png?v=5"
+          src="/hero-women.png?v=7"
           alt=""
           fetchPriority="high"
           decoding="async"
@@ -129,16 +116,19 @@ function GiniLandingContent() {
 
         <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-5 pb-10 pt-28 sm:px-10 sm:pb-14 lg:px-16">
           <div className="w-full max-w-5xl">
-            <h1 className="text-[clamp(1.85rem,6.2vw,4.6rem)] leading-[0.95] font-extrabold tracking-[-0.04em] text-white uppercase">
+            <h1 className="font-sans text-[clamp(1.85rem,6.2vw,4.6rem)] leading-[0.95] font-extrabold tracking-[-0.04em] text-white uppercase">
               <span className="block drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)]">
-                What you&apos;re feeling is not
+                What you&apos;re feeling is
               </span>
-              <TypewriterLoop
-                phrases={["just stress", "normal", "in your head"]}
-                className="mt-1 block text-[#00ced1] uppercase drop-shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
-              />
+              <span className="mt-1 block whitespace-nowrap drop-shadow-[0_2px_16px_rgba(0,0,0,0.35)]">
+                <span>not </span>
+                <TypewriterLoop
+                  phrases={["just stress", "just normal", "in your head"]}
+                  className="text-[#00ced1]"
+                />
+              </span>
             </h1>
-            <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/88 sm:mt-6 sm:text-[17px]">
+            <p className="mt-5 max-w-xl text-[15px] font-normal leading-[1.55] text-white/85 sm:mt-6 sm:text-[17px]">
               Gini is a blood test built for women&apos;s bodies, read in the context of
               your cycle and your history.
             </p>
@@ -155,10 +145,10 @@ function GiniLandingContent() {
       >
         <div className="mx-auto grid w-full max-w-[78rem] grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-x-16 xl:gap-x-20">
           <div className="flex max-w-2xl flex-col items-center text-center lg:items-start lg:text-left">
-            <h2 className="text-[clamp(2rem,4.2vw,3.25rem)] leading-[1.08] font-semibold tracking-[-0.035em] text-pretty">
+            <h2 className="font-display text-[clamp(2.05rem,4.4vw,3.4rem)] font-medium leading-[1.12] tracking-[-0.02em] text-pretty">
               The first blood test built for women.
             </h2>
-            <p className="mt-5 text-[17px] leading-relaxed text-neutral-600 sm:text-[18px]">
+            <p className="mt-5 text-[17px] font-normal leading-[1.55] text-neutral-600 sm:text-[18px]">
               Most blood panels were built around a body that doesn&apos;t cycle. Gini
               reads yours against the week you&apos;re in.
             </p>
@@ -212,7 +202,7 @@ function GiniLandingContent() {
         <div className="absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/what-changes.png?v=5"
+            src="/what-changes.png?v=6"
             alt=""
             className="absolute inset-0 h-full w-full object-cover object-[center_35%] sm:object-[center_42%]"
           />
@@ -221,10 +211,10 @@ function GiniLandingContent() {
 
         <div className="relative z-10 flex min-h-[100svh] flex-col justify-between px-5 py-16 sm:px-10 sm:py-20 lg:px-16">
           <div className="mx-auto w-full max-w-4xl pt-8 text-center sm:pt-4">
-            <h2 className="text-[clamp(2.2rem,7vw,5rem)] leading-[0.92] font-extrabold tracking-[-0.04em] text-white uppercase drop-shadow-[0_2px_18px_rgba(0,0,0,0.4)]">
+            <h2 className="font-sans text-[clamp(2.2rem,7vw,5rem)] leading-[0.92] font-extrabold tracking-[-0.04em] text-white uppercase drop-shadow-[0_2px_18px_rgba(0,0,0,0.4)]">
               What changes
             </h2>
-            <p className="mx-auto mt-5 max-w-[36rem] text-[16px] leading-snug font-medium text-white/92 sm:mt-6 sm:text-[18px]">
+            <p className="mx-auto mt-5 max-w-[36rem] text-[16px] font-normal leading-[1.55] text-white/88 sm:mt-6 sm:text-[18px]">
               <span className="block">At-home testing should be convenient.</span>
               <span className="mt-3 block">It should also fit</span>
               <span className="block">how women&apos;s health works.</span>
@@ -291,6 +281,8 @@ function GiniLandingContent() {
 
       <HowItWorksScroll />
 
+      <SymptomTubeScroll />
+
       <ExpertBoard />
 
       <CustomerQuotes />
@@ -300,7 +292,7 @@ function GiniLandingContent() {
         className="scroll-mt-24 border-t border-neutral-200/80 py-14 sm:scroll-mt-28 sm:py-20"
       >
         <div className="mx-auto max-w-3xl px-5 sm:px-6">
-          <h2 className="text-center text-[clamp(1.6rem,3.4vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.03em]">
+          <h2 className="font-display text-center text-[clamp(1.85rem,3.8vw,2.7rem)] font-medium leading-[1.15] tracking-[-0.02em]">
             If any of this sounds familiar
           </h2>
           <p className="mx-auto mt-4 max-w-[30rem] text-center text-[16px] leading-relaxed text-neutral-600">
@@ -329,10 +321,10 @@ function GiniLandingContent() {
         className="scroll-mt-24 border-t border-neutral-200/80 py-14 sm:scroll-mt-28 sm:py-20"
       >
         <div className="mx-auto max-w-[40rem] px-5 sm:px-6">
-          <h2 className="text-center text-[clamp(1.6rem,3.4vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.03em]">
+          <h2 className="font-display text-center text-[clamp(1.85rem,3.8vw,2.7rem)] font-medium leading-[1.15] tracking-[-0.02em]">
             What we&apos;re building
           </h2>
-          <p className="mt-8 text-center text-[clamp(1.35rem,2.6vw,1.75rem)] font-semibold leading-snug tracking-[-0.03em] text-neutral-950">
+          <p className="font-display mt-8 text-center text-[clamp(1.45rem,2.8vw,1.95rem)] font-medium leading-snug tracking-[-0.02em] text-neutral-950">
             Your body is connected. Your care almost never is.
           </p>
           <p className="mt-8 text-[17px] leading-[1.7] text-neutral-700 sm:text-[18px]">
@@ -347,49 +339,6 @@ function GiniLandingContent() {
             together over time. It will not diagnose you. It will give the person who
             treats you something real to work from.
           </p>
-        </div>
-      </section>
-
-      <section
-        id="what-gini-is"
-        className="scroll-mt-24 border-t border-neutral-200/80 py-14 sm:scroll-mt-28 sm:py-20"
-      >
-        <div className="mx-auto max-w-3xl px-5 sm:px-6">
-          <h2 className="text-center text-[clamp(1.6rem,3.4vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.03em]">
-            What Gini is - and isn&apos;t
-          </h2>
-          <p className="mx-auto mt-4 max-w-[32rem] text-center text-[16px] leading-relaxed text-neutral-600">
-            We&apos;d rather be clear up front. Gini helps you see patterns and walk
-            into care prepared. It does not replace your clinician.
-          </p>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            <div className="rounded-2xl border border-neutral-200/80 bg-white/70 p-6">
-              <h3 className="text-[13px] font-semibold uppercase tracking-[0.12em] text-gini-accent">
-                Gini is
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {GINI_IS.map((item) => (
-                  <li key={item} className="flex gap-2 text-[14px] leading-relaxed text-neutral-700">
-                    <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-gini-accent" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-2xl border border-neutral-200/80 bg-white/40 p-6">
-              <h3 className="text-[13px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
-                Gini is not
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {GINI_IS_NOT.map((item) => (
-                  <li key={item} className="flex gap-2 text-[14px] leading-relaxed text-neutral-600">
-                    <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-300" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
         </div>
       </section>
 

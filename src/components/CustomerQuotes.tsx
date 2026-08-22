@@ -3,39 +3,34 @@ import { Star } from "lucide-react";
 const QUOTES = [
   {
     quote:
-      "For the first time I had something to bring to my appointment besides a list of symptoms nobody believed.",
+      "Nobody helps you put two and two together, and that's so annoying.",
     name: "Maya R.",
-    rotate: "-rotate-[7deg]",
-    width: "w-[17.5rem]",
+    rotate: "-rotate-[6deg]",
     tone: "bg-[#faf7f1]",
-    offset: "sm:mt-10 sm:ml-0",
+    offset: "mt-1 lg:mt-6",
   },
   {
     quote:
-      "I stopped apologizing for how I felt. Seeing the pattern on paper changed the whole conversation.",
+      "Going to a doctor appointment is so frustrating when you don't know what to say. Gini helped me navigate that.",
     name: "Priya S.",
     rotate: "rotate-[5deg]",
-    width: "w-[16.2rem]",
     tone: "bg-white",
-    offset: "sm:mt-0 sm:-mr-4",
+    offset: "mt-6 lg:mt-0",
   },
   {
-    quote:
-      "Testing finally felt built for my cycle, not a random Tuesday at 8am between meetings.",
+    quote: "I feel less alone trying to understand my health.",
     name: "Elena M.",
-    rotate: "rotate-[8deg]",
-    width: "w-[18.2rem]",
+    rotate: "rotate-[7deg]",
     tone: "bg-[#eef3f6]",
-    offset: "sm:-mt-4 sm:ml-6",
+    offset: "mt-0 lg:mt-8",
   },
   {
     quote:
-      "I walked in with the whole picture instead of a half-remembered list. That was the first time a doctor stayed with me.",
+      "I walked in knowing what to ask for, not hoping they'd figure it out for me.",
     name: "Jordan K.",
     rotate: "-rotate-[4deg]",
-    width: "w-[17rem]",
     tone: "bg-[#f4eee6]",
-    offset: "sm:mt-8 sm:-ml-2",
+    offset: "mt-5 lg:mt-2",
   },
 ] as const;
 
@@ -57,32 +52,28 @@ export default function CustomerQuotes() {
   return (
     <section
       id="stories"
-      className="scroll-mt-24 overflow-x-clip border-t border-neutral-200/80 bg-[#f8f8f8] py-16 sm:scroll-mt-28 sm:py-24"
+      className="scroll-mt-24 overflow-x-clip border-t border-neutral-200/80 bg-[#f8f8f8] py-12 sm:scroll-mt-28 sm:py-16"
       aria-label="Customer stories"
     >
-      <div className="mx-auto max-w-5xl px-5 sm:px-6">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <p className="text-center text-[13px] font-semibold uppercase tracking-[0.14em] text-neutral-400">
           From women who know this
         </p>
-        <h2 className="mt-3 text-center text-[clamp(1.7rem,3.6vw,2.5rem)] font-semibold leading-[1.12] tracking-[-0.03em]">
+        <h2 className="font-display mt-3 text-center text-[clamp(1.9rem,4vw,2.8rem)] font-medium leading-[1.15] tracking-[-0.02em]">
           They were told it was nothing.
         </h2>
-        <p className="mx-auto mt-4 max-w-[30rem] text-center text-[16px] leading-relaxed text-neutral-600">
-          Notes from early members who were done explaining themselves from
-          scratch.
-        </p>
 
-        <div className="mx-auto mt-12 flex max-w-4xl flex-col items-center gap-8 sm:mt-16 sm:flex-row sm:flex-wrap sm:items-start sm:justify-center sm:gap-x-8 sm:gap-y-12">
+        <div className="mx-auto mt-10 grid grid-cols-2 gap-x-3 gap-y-8 lg:mt-12 lg:grid-cols-4 lg:items-start lg:gap-x-5 lg:gap-y-0">
           {QUOTES.map((item) => (
             <figure
               key={item.name}
-              className={`${item.width} ${item.rotate} ${item.offset} ${item.tone} quote-vignette relative max-w-[85vw] rounded-[1.15rem] px-6 py-6 shadow-[0_18px_40px_rgba(20,20,20,0.08)] sm:px-7 sm:py-7`}
+              className={`${item.rotate} ${item.offset} ${item.tone} quote-vignette relative w-full rounded-[1.15rem] px-4 py-5 shadow-[0_18px_40px_rgba(20,20,20,0.08)] sm:px-5 sm:py-6`}
             >
               <Stars />
-              <blockquote className="mt-4 font-editorial text-[1.2rem] leading-[1.35] text-neutral-800">
+              <blockquote className="mt-3 font-editorial text-[1.05rem] leading-[1.35] text-neutral-800 sm:mt-4 sm:text-[1.15rem]">
                 &ldquo;{item.quote}&rdquo;
               </blockquote>
-              <figcaption className="mt-5 text-[13px] font-semibold tracking-[-0.02em] text-neutral-500">
+              <figcaption className="mt-4 text-[12px] font-semibold tracking-[-0.02em] text-neutral-500 sm:mt-5 sm:text-[13px]">
                 {item.name}
               </figcaption>
             </figure>

@@ -4,13 +4,33 @@
 @theme inline {
   --font-sans: var(--font-geist-sans), "Helvetica Neue", ui-sans-serif, system-ui,
     sans-serif;
+  --font-body: var(--font-inter), "Helvetica Neue", ui-sans-serif, system-ui,
+    sans-serif;
   --font-editorial: var(--font-cormorant), "Times New Roman", Georgia, serif;
+  --font-display: var(--font-bodoni), "Times New Roman", Georgia, serif;
   --color-gini-surface: #f8f8f8;
   --color-gini-accent: #00ced1;
 }
 
 .font-editorial {
   font-family: var(--font-editorial);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+p,
+li,
+label,
+input,
+textarea {
+  font-family: var(--font-body);
 }
 
 .text-gini-accent {
@@ -120,6 +140,23 @@ svg {
       rgba(0, 0, 0, 0.22) 70%,
       rgba(0, 0, 0, 0.38) 100%
     );
+}
+
+/* Keep her + the arm device in frame on tall/narrow screens; show the full scene on wide ones. */
+.how-test-crop {
+  object-position: 66% 42%;
+}
+
+@media (min-aspect-ratio: 4/3) {
+  .how-test-crop {
+    object-position: 58% 40%;
+  }
+}
+
+@media (min-aspect-ratio: 16/10) {
+  .how-test-crop {
+    object-position: 50% 50%;
+  }
 }
 
 .how-vignette {

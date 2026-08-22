@@ -1,9 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond } from "next/font/google";
+import { Bodoni_Moda, Cormorant_Garamond, Inter } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 const geist = GeistSans;
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const bodoni = Bodoni_Moda({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-bodoni",
+  display: "swap",
+});
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -35,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geist.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${geist.variable} ${inter.variable} ${bodoni.variable} ${cormorant.variable}`}>
       <body className="bg-gini-surface font-sans antialiased text-neutral-950">
         {children}
       </body>
